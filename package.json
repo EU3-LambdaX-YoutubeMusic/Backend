@@ -1,29 +1,19 @@
 {
   "name": "youtube_music",
   "version": "1.0.0",
-  "description": "",
+  "description": "A desktop app that allows users play youtube tracks/videos in the BG",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
     "test": "jest --runInBand --detectOpenHandles --forceExit ./test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EU3-LambdaX-YoutubeMusic/Backend.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EU3-LambdaX-YoutubeMusic/Backend/issues"
-  },
-  "homepage": "https://github.com/EU3-LambdaX-YoutubeMusic/Backend#readme",
   "dependencies": {
-    "express": "^4.17.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "express": "~4.16.0",
     "helmet": "^3.21.2",
     "http-errors": "~1.6.2",
     "joi": "^14.3.1",
@@ -32,8 +22,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.8.0",
     "mongoose-unique-validator": "^2.0.3",
-    "morgan": "~1.9.0",
-    "nodemailer": "^6.4.5"
+    "morgan": "~1.9.0"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.3",
