@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const UserSchema = Schema({
+const PlaylistSchema = Schema({
   user_id: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 50,
   },
   artist: {
     type: String,
@@ -26,11 +24,18 @@ const UserSchema = Schema({
     unique: true,
   },
   favourite: {
-    type: String,
-    minlength: 5,
-    maxlength: 80,
+    type: Boolean,
+    default: false,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  update_at: {
+    type: Date,
+    default: Date.now,
   },
 });
 
-const UserModel = mongoose.model("User", UserSchema);
-module.exports = UserModel;
+const PlaylistModel = mongoose.model("Playlist", PlaylistSchema);
+module.exports = PlaylistModel;
