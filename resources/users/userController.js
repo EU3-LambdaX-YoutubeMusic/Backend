@@ -55,7 +55,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { error } = Validation.validateUser(req.body);
+    const { error } = Validation.validateLogin(req.body);
 
     if (error) {
       return res.status(422).json({
