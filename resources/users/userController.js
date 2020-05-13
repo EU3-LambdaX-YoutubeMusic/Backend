@@ -19,7 +19,6 @@ const register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     const existingUser = await Users.findOne({ email });
-    console.log(existingUser);
 
     if (existingUser) {
       return res.status(409).json({
@@ -66,7 +65,7 @@ const login = async (req, res) => {
 
     const { email, password } = req.body;
 
-    const foundUser = await Users.findOne({ email, password });
+    const foundUser = await Users.findOne({ email });
 
     if (!foundUser) {
       return res.status(400).json({
@@ -75,7 +74,7 @@ const login = async (req, res) => {
       });
     }
 
-    const userPassword = bcrypt.compareSync(password, existingUser.password);
+    const userPassword = bcrypt.compareSync(password, foundUser.password);
 
     if (!userPassword) {
       return res.status(400).json({
@@ -84,7 +83,7 @@ const login = async (req, res) => {
     }
     return res.status(200).json({
       message: "Logged in successfully",
-      user: AuthHelper.Auth.toAuthJSON(existingUser),
+      user: AuthHelper.Auth.toAuthJSON(foundUser),
     });
   } catch (error) {
     return res.status(500).json({
