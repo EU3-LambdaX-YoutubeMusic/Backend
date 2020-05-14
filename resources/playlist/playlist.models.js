@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const PlaylistSchema = Schema({
   user_id: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: "users",
   },
   artist: {
     type: String,
