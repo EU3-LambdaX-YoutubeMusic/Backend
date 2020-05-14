@@ -7,7 +7,7 @@ const { validateToken } = require("./middlewares");
 
 const { getAllMusic, addMusic } = playlistController;
 
-router.get("/getAllMusic", getAllMusic);
+router.get("/getAllMusic", validateToken, getAllMusic);
 router.post("/addMusic", validateToken, addMusic);
 
 module.exports = router;
