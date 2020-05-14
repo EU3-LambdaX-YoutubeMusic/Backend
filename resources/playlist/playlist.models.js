@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const PlaylistSchema = Schema({
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "Users",
   },
   artist: {
     type: String,
