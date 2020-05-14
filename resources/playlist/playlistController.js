@@ -1,4 +1,5 @@
 const Playlist = require("./playlist.models");
+const AuthHelper = require("../users/auth");
 
 const getAllMusic = async (req, res) => {
   try {
@@ -17,4 +18,24 @@ const getAllMusic = async (req, res) => {
   }
 };
 
-module.exports = { getAllMusic };
+const addMusic = async (req, res) => {
+  try {
+    const { artist, title, video_url, favourite } = req.body;
+    // const existingUser = await Playlist.findOne({ user_id });
+    const playlist = new Playlist({
+      artist,
+      title,
+      video_url,
+      favourite,
+    });
+    await playlist.save();
+    // });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      error,
+    });
+  }
+};
+
+module.exports = { getAllMusic, addMusic };
