@@ -19,9 +19,11 @@ const getAllMusic = async (req, res) => {
 const addMusic = async (req, res) => {
   try {
     const { artist, title, video_url, favourite } = req.body;
+    const userId = req.userId;
     const { token } = req.headers;
     if (token) {
       const playlist = new Playlist({
+        user_id: userId,
         artist,
         title,
         video_url,
