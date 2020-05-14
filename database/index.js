@@ -13,7 +13,6 @@ module.exports = async () => {
     await mongoose.connect(connectionUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: 'youtube_music'
     });
     console.log("Connected to Database");
   } catch (e) {
