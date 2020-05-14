@@ -1,10 +1,8 @@
 const Playlist = require("./playlist.models");
-const AuthHelper = require("../users/auth");
 
 const getAllMusic = async (req, res) => {
   try {
     Playlist.find({}).then(function (playlist) {
-      // res.send(playlist);
       res.status(200).json({
         status: 200,
         playlist,
@@ -21,7 +19,6 @@ const getAllMusic = async (req, res) => {
 const addMusic = async (req, res) => {
   try {
     const { artist, title, video_url, favourite } = req.body;
-    // const existingUser = await Playlist.findOne({ user_id });
     const { token } = req.headers;
     if (token) {
       const playlist = new Playlist({
@@ -43,8 +40,6 @@ const addMusic = async (req, res) => {
         message: "Login to add music",
       });
     }
-
-    // });
   } catch (error) {
     return res.status(500).json({
       status: 500,
