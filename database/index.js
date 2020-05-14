@@ -13,10 +13,8 @@ module.exports = async () => {
     await mongoose.connect(connectionUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: 'youtube_music'
     });
     console.log("Connected to Database");
-  
   } catch (e) {
     console.log(`Connection to database failed: ${e.message}`);
   }

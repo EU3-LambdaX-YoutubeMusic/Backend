@@ -1,5 +1,5 @@
 # Description
-Add attribution link to Readme and code
+
 ## Type of change
 Please delete options that are not relevant.
 - [ ] Bug fix (non-breaking change which fixes an issue)
