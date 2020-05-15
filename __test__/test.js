@@ -38,7 +38,33 @@ describe('user model test', () => {
     expect(res.body.user.id).toBe(savedUser._id.toString());
     done();
   });
- 
+
+
+  it('create user without required field should fail', async () => {
+    let err;
+    try {
+      const userWithoutRequiredField = await request.post("/api/v1/users/register")
+        .send({ firstName: 'TekLoon' });
+      err = userWithoutRequiredField;
+    } catch (error) {
+      err = error;
+    }
+    expect(err.body).toBeDefined();
+    expect(err.body.status).toBe(422);
+    expect(err.body.error).toBe('"lastName" is required');
+  });
+
+  it('should throw an error if user already exists', async () => {
+    const res = await request.post("/api/v1/users/register")
+      .send({ firstName: 'Tola',
+        lastName: 'Akere',
+        email: 'tolyay@gmail.com',
+        password: '123456' });
+    expect(res.body).toBeDefined();
+    expect(res.body.status).toBe(409);
+    expect(res.body.message).toBe('user already exist');
+  });
+  
 
 });
 
