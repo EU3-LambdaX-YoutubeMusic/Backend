@@ -64,7 +64,7 @@ describe('user model test', () => {
     expect(res.body.status).toBe(409);
     expect(res.body.message).toBe('user already exist');
   },5000);
-  
+
     it('should login an existing user', async () => {
     const res = await request.post("/api/v1/users/login")
       .send({ email: "tolyay@gmail.com", password: '123456' });
@@ -83,8 +83,8 @@ describe('user model test', () => {
 
 async function removeAllCollections() {
   const collections = Object.keys(mongoose.connection.collections);
-  for (const wayfarer_test of collections) {
-    const collection = mongoose.connection.collections[wayfarer_test];
+  for (const test of collections) {
+    const collection = mongoose.connection.collections[test];
     await collection.deleteMany();
   }
 }
