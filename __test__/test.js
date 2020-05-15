@@ -37,7 +37,7 @@ describe('user model test', () => {
     expect(res.body.user.email).toBe(savedUser.email);
     expect(res.body.user.id).toBe(savedUser._id.toString());
     done();
-  });
+  },5000);
 
 
   it('create user without required field should fail', async () => {
@@ -52,7 +52,7 @@ describe('user model test', () => {
     expect(err.body).toBeDefined();
     expect(err.body.status).toBe(422);
     expect(err.body.error).toBe('"lastName" is required');
-  });
+  },5000);
 
   it('should throw an error if user already exists', async () => {
     const res = await request.post("/api/v1/users/register")
@@ -63,8 +63,20 @@ describe('user model test', () => {
     expect(res.body).toBeDefined();
     expect(res.body.status).toBe(409);
     expect(res.body.message).toBe('user already exist');
-  });
+  },5000);
   
+    it('should login an existing user', async () => {
+    const res = await request.post("/api/v1/users/login")
+      .send({ email: "tolyay@gmail.com", password: '123456' });
+    const validUser = await UserModel.findOne({ email: "tolyay@gmail.com" });
+    const savedUser = await validUser.save()
+
+    expect(res.body.user.id).toBeDefined();
+    expect(res.body.user.id).toBe(savedUser._id.toString());
+    expect(res.body.user.email).toBe(savedUser.email);
+    expect(savedUser.firstName).toBeDefined();
+    expect(savedUser.lastName).toBeDefined();
+  },5000);
 
 });
 
@@ -78,4 +90,4 @@ async function removeAllCollections() {
 }
 afterAll(async () => {
   await removeAllCollections();
-});
+},5000);
