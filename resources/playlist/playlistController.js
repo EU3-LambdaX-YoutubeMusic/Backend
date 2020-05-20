@@ -88,7 +88,27 @@ const updateMusic = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Error updating profile ${error.message}` });
+      .json({ message: `Error updating profile: ${error.message}` });
   }
 };
-module.exports = { getAllMusic, addMusic, updateMusic };
+
+const deleteMusic = async (req, res) => {
+  try {
+    const { musicId } = req.body;
+    const { token } = req.headers;
+
+    if (token && musicId) {
+      // const selectedMusic =
+      await Playlist.findById(musicId).deleteOne();
+
+      res.status(200).json({ message: "music successfully deleted" });
+    } else {
+      // console.log("Faiiiiiiiiiiiiiiioll");
+      res.status(400).json({ message: `musicId not found` });
+    }
+  } catch (error) {
+    res.status(500).json({ message: `Error deleting music: ${error.message}` });
+  }
+};
+
+module.exports = { getAllMusic, addMusic, updateMusic, deleteMusic };
