@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const playlistController = require("./playlistController");
-const { validateToken } = require("./middlewares");
+const { validateToken } = require("../../utils/validateToken");
 
 const { getAllMusic, addMusic } = playlistController;
 
