@@ -21,10 +21,9 @@ const getAllMusic = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({
-      status: 500,
-      error,
-    });
+    res
+      .status(500)
+      .json({ message: `Error getting all music: ${error.message}` });
   }
 };
 
@@ -55,23 +54,18 @@ const addMusic = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({
-      status: 500,
-      error,
-    });
+    res.status(500).json({ message: `Error adding music: ${error.message}` });
   }
 };
 
 const updateMusic = async (req, res) => {
   try {
     const { artist, title, video_url, favourite, musicId } = req.body;
-    // const userId = req.userId;
     const { token } = req.headers;
 
-    // await updateProfile(subject, musicId);
     if (token && musicId) {
       const selectedMusic = await Playlist.findById(musicId);
-      console.log(selectedMusic.video_url);
+
       selectedMusic.artist = artist;
       selectedMusic.title = title;
       selectedMusic.video_url = video_url;
@@ -82,13 +76,10 @@ const updateMusic = async (req, res) => {
         message: "update successful",
       });
     } else {
-      // console.log("Faiiiiiiiiiiiiiiioll");
       res.status(400).json({ message: `musicId not found` });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: `Error updating profile: ${error.message}` });
+    res.status(500).json({ message: `Error updating music: ${error.message}` });
   }
 };
 
@@ -98,12 +89,10 @@ const deleteMusic = async (req, res) => {
     const { token } = req.headers;
 
     if (token && musicId) {
-      // const selectedMusic =
       await Playlist.findById(musicId).deleteOne();
 
       res.status(200).json({ message: "music successfully deleted" });
     } else {
-      // console.log("Faiiiiiiiiiiiiiiioll");
       res.status(400).json({ message: `musicId not found` });
     }
   } catch (error) {
