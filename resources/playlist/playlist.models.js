@@ -23,6 +23,12 @@ const PlaylistSchema = Schema({
     maxlength: 80,
     unique: true,
   },
+  thumbnail_url: {
+    type: String,
+    minlength: 5,
+    maxlength: 80,
+    unique: true,
+  },
   favourite: {
     type: Boolean,
     default: false,
