@@ -29,7 +29,7 @@ const getAllMusic = async (req, res) => {
 
 const addMusic = async (req, res) => {
   try {
-    const { artist, title, video_url, favourite } = req.body;
+    const { artist, title, video_url, thumbnail_url, favourite } = req.body;
     const userId = req.userId;
     const { token } = req.headers;
     if (token) {
@@ -38,6 +38,7 @@ const addMusic = async (req, res) => {
         artist,
         title,
         video_url,
+        thumbnail_url,
         favourite,
       });
       await playlist.save();
@@ -60,7 +61,14 @@ const addMusic = async (req, res) => {
 
 const updateMusic = async (req, res) => {
   try {
-    const { artist, title, video_url, favourite, musicId } = req.body;
+    const {
+      artist,
+      title,
+      video_url,
+      thumbnail_url,
+      favourite,
+      musicId,
+    } = req.body;
     const { token } = req.headers;
 
     if (token && musicId) {
@@ -69,6 +77,7 @@ const updateMusic = async (req, res) => {
       selectedMusic.artist = artist;
       selectedMusic.title = title;
       selectedMusic.video_url = video_url;
+      selectedMusic.thumbnail_url = thumbnail_url;
       selectedMusic.favourite = favourite;
       await selectedMusic.save();
 
